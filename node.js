@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 
 // Replace with your actual API Key and API Key Secret
-const apiKey = 'MdvIXw5zEy73aA1sXgOVhY6C7';
-const apiKeySecret = 'Q4q5J7TDA5VZOoQfRJ86cZuiPbDmQ5VYwJ05qlGQaqlaouwHLH';
+const apiKey = 'here your api';
+const apiKeySecret = 'here your api';
 
 // Function to fetch tweet text
 async function fetchTweetText(url) {
