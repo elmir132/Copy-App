@@ -2,7 +2,7 @@
 const axios = require('axios');
 
 // Define the API key and the text to be rephrased
-const apiKey = '039sYGVlgTR7t59w5V0150fnd7NyJfEW';
+const apiKey = 'here api key';
 const textToBeRephrased = 'During the semester, the main part of my work was mostly directed to the organization of the educational forum edu monthasdasdasdasdassdas';
 
 // Set up the request config
