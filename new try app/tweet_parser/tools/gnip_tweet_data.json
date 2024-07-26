@@ -1,0 +1,18 @@
+[
+    {
+        "created_at_string": "Fri Jul 22 10:15:30 +0000 2023",
+        "all_text": "Just had a great time at the park!",
+        "user": {
+            "screen_name": "user123",
+            "name": "John Doe"
+        }
+    },
+    {
+        "created_at_string": "Sat Jul 23 15:45:00 +0000 2023",
+        "all_text": "Enjoying a delicious meal with friends.",
+        "user": {
+            "screen_name": "user456",
+            "name": "Jane Smith"
+        }
+    }
+]

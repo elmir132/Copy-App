@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="p3099992_e_h9_ab-removebg-preview.png" />
+
+    <link rel="stylesheet" href="radiobutton.css">
+    <script type="text/javascript" src="radiobutton.js"></script>
+
+    <title>Twits</title>
+    <style>
+       body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #1e2235; /* Change to a valid dark color */
+
+    }
+    #container {
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        width: 40%;
+        background-color: aliceblue;
+
+    }
+    #threadComposer {
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }         
+
+    #threadComposer button {
+        margin: 5px;
+    }
+
+
+    #readTweet {
+        background-color: #black;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+    }
+
+    #readTweet1 {
+        background-color: #black;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+    }
+
+    #readTweet button {
+        margin: 5px;
+        height: 90px;
+    }
+
+
+    button {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+        justify-content: center;
+
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .night-mode button {
+        background-color: #1D257D;
+    }
+
+    .night-mode .input0 {
+        background-color:#1e2235;
+    }
+
+    .night-mode textarea:nth-child(1) {
+        background-color:#1e2235;
+
+    } 
+
+    .night-mode textarea:focus{
+        border-color: #9147ff;
+        background: white;
+    }
+/*
+.night-mode .textarea {
+    background-color:#1e2235;
+    }*/
+    /* Style the splitButton as a checkmark */
+    .checkmark-button {
+        width: 20px;
+        height: 24px;
+        background-color: transparent;
+        border: 2px solid #007bff; /* Blue border */
+        border-radius: 50%; /* Make it circular */
+        position: relative;
+        cursor: pointer;
+        padding: 13px 13px;
+
+    }
+
+    .checkmark-button::before {
+        content: "\2713"; /* Unicode checkmark symbol */
+        font-size: 18px;
+        color: #007bff; /* Blue color */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+
+
+    /* Style the cleanButton as a close button */
+    .close-button {
+        width: 24px;
+        height: 24px;
+        background-color: transparent;
+        border: 2px solid #ff0000; /* Red border */
+        border-radius: 50%; /* Make it circular */
+        position: relative;
+        cursor: pointer;
+        padding: 13px 13px;a
+    }
+
+    .close-button::before,
+    .close-button::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60%;
+        height: 2px;
+        background-color: #ff0000; /* Red color */
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .close-button::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+
+
+
+    #threadPreview {
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 20px 20px 0;
+    }
+
+    #threadPreview .tweet {
+        margin: 10px auto;
+    }
+    .tweet {
+        /* ... your existing styles ... */
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 10px auto;
+        height: 180px
+    }
+    .tweet textarea {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        resize: none;
+        margin-bottom: 10px;
+        height: 150px; /* Adjust the height as needed */
+        outline: none; /* Remove the outline when clicked */
+    }
+    .close-button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+    }
+    #tweetText {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        resize: none;
+        margin-bottom: 10px;
+        height: 100px; /* Increase the height */
+        outline: none; /* Remove the outline when clicked */
+    }
+    #readTweetUrl{  width: 60%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        resize: none;
+        margin-bottom: 0px;
+        height: 30px; /* Increase the height */
+    outline: none; /* Remove the outline when clicked */}
+
+
+    #tweetThreadText{
+        width: 65%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        resize: none;
+        margin-bottom: 0px;
+        height: 80px;
+        outline: none;
+    }
+
+
+    .editable {
+        border: 1px solid blue;
+        background-color: white;
+    }
+
+
+    body.night-mode {
+        background-color: #000000; /* Change to a valid dark color */
+        color: #fff;
+    }
+
+
+
+
+    #container.night-mode, #threadPreview.night-mode, #threadComposer.night-mode{
+        background-color: #1e2235; /* Change to a valid dark color */
+        color: #green;
+    }
+    .image-button {
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        cursor: pointer;
+        font-size: 180%;
+    }
+
+
+    /*Image drop function*/
+    /* Updated CSS */
+
+    /* Flex container for drop zone and upload button */
+    .image-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center horizontally */
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    /* Image drop function */
+    .drop-zone {
+        border: 2px dashed #007BFF;
+        border-radius: 4px;
+        padding: 40px 0px 40px 0px;
+
+        cursor: pointer;
+    }
+
+    /* Style the images below tweets */
+    .tweet-image {
+        max-width: 100%;
+        margin-top: 0px;
+    }
+
+
+    /* Style the tweet element when it has an image */
+    .tweet.has-image .drop-zone {
+        display: none; /* Hide the drop zone when an image is present */
+    }
+
+    /* Style the image container */
+    .image-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Style the cancel button */
+    .cancel-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: rgba(255, 0, 0, 0.7);
+        color: white;
+        border: none;
+        padding: 2px 6px;
+        cursor: pointer;
+        border-radius: 0 4px 0 0;
+        font-size: 12px;
+        line-height: 1;
+        opacity: 0.7;
+    }
+
+    .cancel-button:hover {
+        opacity: 1;
+    }
+
+    .input0{
+        width: 30%;
+        margin-right:10px;
+        font-size: 14px;
+        border-radius: 19px;
+        line-height: 118.5;
+        padding: 9px 10px;
+        transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+        border: 2px solid #dee1e2;
+        color: rgb(14, 14, 16);
+        background: aliceblue;
+        display: block;
+        height: 36px;
+    }
+
+    .input0:nth-child(2){
+        margin-right:20px;
+    }
+
+    .input0:hover {
+        border-color: green;
+    }
+
+    .input0:focus{
+        border-color: #9147ff;
+        background: white;
+    }
+
+
+    .green-button {
+      background-image: linear-gradient(135deg, #008aff, #86d472);
+      color: #fff !important;
+      display: block;  
+      text-decoration: none; 
+
+  }
+
+  #customReplaceButton{
+
+    margin: 5px; height: 50px !important; border-radius: 19px;
+    background-color: transparent; color: grey; transition:box-shadow
+    100ms ease-in, border 100ms ease-in, background-color 100ms
+    ease-in, transform 10s; border: 2px solid #dee1e2;
+}
+
+#customReplaceButton:hover{
+
+    color: green;
+    transition:box-shadow 100ms ease-in, border 100ms ease-in,background-color 100ms ease-in;  
+    transition-duration: 0.4s;
+
+    border: 2px solid green;
+
+    /*background-image: linear-gradient(135deg, #008aff, #86d472);*/
+
+}
+
+.replace_div{
+    display: flex;
+    margin-top: 10px
+
+}
+/*Image drop function*/
+
+</style>
+</head>
+<body>
+    <div id="container">
+        <button id="nightModeButton">🌙</button>
+
+        <div id="threadComposer">
+            <textarea id="tweetText" placeholder="Compose your tweet"></textarea>
+            <button id="addTweet">Add Tweet</button>
+            <button id="postThread">Post Thread</button>
+
+
+        </div>
+
+        <!-- <div id="readTweet">
+            <input id="readTweetUrl" type="text" placeholder="Enter tweet URL"> -->
+            <!-- <button id="readButton">Read</button> -->
+            <!-- <p style="text-align: center">https://twitter.com/FukkGenius/status/1693538339385741384</p>
+            </div> -->
+
+            <div id="readTweet">
+
+                <div id = "readTweet1">
+
+                    <div class="radio">
+                        <input type="radio" id="midasButton" name="influencer" value="Midas" checked>
+                        <label for="midasButton">Midas</label>
+                    </div>
+
+                    <div class="radio">
+                        <input type="radio" id="chainMindButton" name="influencer" value="Chain Mind">
+                        <label for="chainMindButton">Chain Mind</label>
+                    </div>
+
+                    <div class="radio">
+                        <input type="radio" id="cyclopButton" name="influencer" value="Cyclop">
+                        <label for="cyclopButton">Cyclop</label>
+                    </div>
+
+                    <div class="radio">
+                        <input type="radio" id="bladeButton" name="influencer" value="Blade">
+                        <label for="bladeButton">Symbiot</label>
+                    </div>
+                    
+
+
+
+
+                    <!-- <label for="customReplace">Custom Replace:</label> -->
+                    <div class="replace_div">
+
+                        <input type="text" class="input0" id="customReplaceFrom" placeholder="Enter symbol to replace">
+                        <input type="text" class="input0" id="customReplaceTo" placeholder="Enter replacement symbol">
+                        <button id="customReplaceButton" style="">Apply Custom Replace</button>
+
+                    </div>
+
+                </div>
+
+                <textarea id="tweetThreadText" placeholder="Paste tweet thread here"></textarea>
+                <button id="processButton">Process Thread</button>
+
+            </div>
+
+            <button id="splitButton" class="checkmark-button" style="margin-left: 35%"></button>
+            <button id="copyThreadButton" style="margin-left: 0%;">Copy Thread</button>
+            <button id="clearButton" class="close-button"></button>
+
+            <div id="threadPreview">
+                <!-- Display the thread preview here -->
+            </div>
+
+            <script>
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    const nightModeButton = document.getElementById('nightModeButton');
+                    const container = document.getElementById('container');
+                    const threadPreview = document.getElementById('threadPreview');
+                    const threadComposer = document.getElementById('threadComposer');
+                    const body = document.body;
+                    const readButton = document.getElementById('readButton');
+                    const tweetThreadText = document.getElementById('tweetThreadText');
+    const splitButton = document.getElementById('splitButton'); // Split button
+    const processButton = document.getElementById('processButton'); // Process button
+    const clearButton = document.getElementById('clearButton'); // Clear button
+    const copyThreadButton = document.getElementById('copyThreadButton');
+
+    
+    // Initialize processedTweets from local storage
+    const processedTweets = JSON.parse(localStorage.getItem('processedTweets')) || [];
+
+    // Render the processed tweets on page load
+    renderProcessedTweets(processedTweets);
+
+    // Define the selected action (split or process)
+    let selectedAction = 'split'; // Default to 'split'
+
+  let isCustomReplaceEnabled = false; // Initially, custom replacement is disabled
+
+    // Add an event listener to the customReplaceButton to toggle custom replacement
+    const customReplaceButton = document.getElementById('customReplaceButton');
+    customReplaceButton.addEventListener('click', () => {
+    isCustomReplaceEnabled = !isCustomReplaceEnabled; // Toggle the state
+    
+    // Add or remove the green-button class based on the flag
+    if (isCustomReplaceEnabled) {
+        customReplaceButton.classList.add('green-button');
+    } else {
+        customReplaceButton.classList.remove('green-button');
+    }
+});
+
+
+
+    splitButton.addEventListener('click', () => {
+        selectedAction = 'split';
+    });
+
+
+    processButton.addEventListener('click', async () => {
+        const threadText = tweetThreadText.value;
+        if (threadText.trim() !== '') {
+            const influencer = getSelectedInfluencer();
+            const rewrittenTweets = await processThread(threadText, influencer);
+            console.log('Rewritten Tweets:', rewrittenTweets);
+        renderProcessedTweets(rewrittenTweets); // Use the rewritten tweets here
+        updateLocalStorageProcessed(rewrittenTweets); // Update local storage with rewritten tweets
+    }
+});
+
+
+    splitButton.addEventListener('click', async () => {
+    let threadText = tweetThreadText.value; // Retrieve the text from the textarea
+    if (threadText.trim() !== '') {
+        const influencer = getSelectedInfluencer();
+        let updatedTweets;
+
+        if (isCustomReplaceEnabled) {
+            const customReplaceFrom = document.getElementById('customReplaceFrom').value;
+            const customReplaceTo = document.getElementById('customReplaceTo').value;
+
+            if (customReplaceFrom && customReplaceTo) {
+                // Apply the custom replacement to each tweet in threadText
+                threadText = threadText.replace(new RegExp(customReplaceFrom, 'g'), customReplaceTo);
+                
+                // Set the modified text back into the textarea
+                tweetThreadText.value = threadText;
+            }
+        }
+
+        if (selectedAction === 'split') {
+            updatedTweets = splitThread(threadText, influencer);
+        } else if (selectedAction === 'process') {
+            updatedTweets = await processThread(threadText, influencer);
+        }
+
+        console.log('Updated Tweets:', updatedTweets);
+        renderProcessedTweets(updatedTweets);
+        updateLocalStorageProcessed(updatedTweets);
+    }
+});
+
+    clearButton.addEventListener('click', () => {
+        const threadPreview = document.getElementById('threadPreview');
+    threadPreview.innerHTML = ''; // Clear the content
+});
+
+    // Copy thread
+    copyThreadButton.addEventListener('click', () => {
+        const threadText = getThreadText();
+        copyToClipboard(threadText);
+    });
+
+
+    // Function to get the selected influencer
+    function getSelectedInfluencer() {
+        const radioButtons = document.getElementsByName('influencer');
+        for (const radioButton of radioButtons) {
+            if (radioButton.checked) {
+                return radioButton.value;
+            }
+        }
+        return 'Cyclop'; // Default to Cyclop if none selected
+    }
+
+
+// REPLACE
+
+
+
+
+async function rewriteTweet(tweet) {
+    try {
+        const response = await fetch('https://api.apilayer.com/paraphraser', {
+            method: 'POST',
+            headers: {
+                'apikey': '039sYGVlgTR7t59w5V0150fnd7NyJfEW',
+            },
+            body: tweet,
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const paraphrasedTweet = data.paraphrased; // Extract the 'paraphrased' part
+            return paraphrasedTweet;
+        } else {
+            console.error('Rewriting request failed.');
+            return tweet; // Return the original tweet on failure
+        }
+    } catch (error) {
+        console.error('Error rewriting tweet:', error);
+        return tweet; // Return the original tweet on error
+    }
+}
+
+
+
+// Function to replace characters based on the selected influencer
+async function processThread(threadText, influencer) {
+    // Define the splitting pattern based on the chosen influencer
+    let splitPattern;
+    let headerPattern;
+
+    if (influencer === "Midas") {
+        splitPattern = /(?=\d\/)|(?=\nMidas\n@nobrainflip\n·\n\d+h\n)|(?=\nMidas)/;
+        headerPattern = /^Midas$/;
+    } else if (influencer === "Chain Mind") {
+        splitPattern = /(?=\d\/➫)|(?=\n𝗖𝗛𝗔𝗜𝗡 𝗠𝗜𝗡𝗗 ⛓🧠\n@0xChainMind\n·\n\d+h\n)|(?=\n𝗖𝗛𝗔𝗜𝗡 𝗠𝗜𝗡𝗗 ⛓🧠)/;
+        headerPattern = /^𝗖𝗛𝗔𝗜𝗡 𝗠𝗜𝗡𝗗 ⛓🧠$/;
+    } else if (influencer === "Blade") {
+        splitPattern = /(?=\d\/➫)|(?=\nsymbiote\n@cryptosymbiiote\n·\n\d+h\n)|(?=\nsymbiote)/;
+        headerPattern = /^symbiote$/;
+    } else {
+        splitPattern = /(?=\d\/➮)|(?=\n𝗰𝘆𝗰𝗹𝗼𝗽\n@nobrainflip\n·\n\d+h\n)|(?=\ncyclop)/;
+        headerPattern = /^𝗰𝘆𝗰𝗹𝗼𝗽$/u;
+    }
+
+    const tweets = threadText.split(splitPattern);
+    const rewrittenTweets = [];
+
+    for (const tweet of tweets) {
+        let modifiedTweet = tweet.trim();
+
+        // Replace characters based on the selected influencer
+        if (influencer === "Midas") {
+            modifiedTweet = modifiedTweet.replace(/(\d+\/)/g, (match) => match + "➲ ");
+            modifiedTweet = modifiedTweet.replace(/➫/g, "➺");
+        } else if (influencer === "Chain Mind") {
+            modifiedTweet = modifiedTweet.replace(/➫/g, "➲");
+            modifiedTweet = modifiedTweet.replace(/❍/g, "➺");
+        } else if (influencer === "Blade") {
+            modifiedTweet = modifiedTweet.replace(/(\d+\/)/g, (match) => match + "➲");
+            modifiedTweet = modifiedTweet.replace(/❯/g, "➺");
+        } else{
+            modifiedTweet = modifiedTweet.replace("➮", "➲");
+            modifiedTweet = modifiedTweet.replace(/✧/g,"➺");
+        }
+
+        // Check for the header pattern and remove the first 3 lines if found
+        modifiedTweet = trimExcludedLines(modifiedTweet, headerPattern, 4);
+
+        if (modifiedTweet.endsWith(" Views")) {
+            const lines = modifiedTweet.split('\n');
+            if (lines.length > 6) {
+                modifiedTweet = lines.slice(0, -4).join('\n');
+            } else {
+                modifiedTweet = ''; // Remove the entire tweet if there are fewer than 12 lines
+            }
+        }
+
+        const rewrittenTweet = await rewriteTweet(modifiedTweet);
+        rewrittenTweets.push(rewrittenTweet);
+    }
+
+    return rewrittenTweets.filter(tweet => tweet.trim() !== ''); // Filter out empty tweets
+}
+
+
+// Function to split the thread into tweets
+function splitThread(threadText, influencer) {
+    // Define the splitting pattern based on the chosen influencer
+    let splitPattern;
+    let headerPattern;
+
+    if (influencer === "Midas") {
+        splitPattern = /(?=\d\/)|(?=\nMidas\n@nobrainflip\n·\n\d+h\n)|(?=\nMidas)/;
+        headerPattern = /^Midas$/;
+    } else if (influencer === "Chain Mind") {
+        splitPattern = /(?=\d\/➫)|(?=\n𝗖𝗛𝗔𝗜𝗡 𝗠𝗜𝗡𝗗 ⛓🧠\n@0xChainMind\n·\n\d+h\n)|(?=\n𝗖𝗛𝗔𝗜𝗡 𝗠𝗜𝗡𝗗 ⛓🧠)/;
+        headerPattern = /^𝗖𝗛𝗔𝗜𝗡 𝗠𝗜𝗡𝗗 ⛓🧠$/;
+    } else if (influencer === "Blade") {
+        splitPattern = /(?=\d\/➫)|(?=\nsymbiote\n@cryptosymbiiote\n·\n\d+h\n)|(?=\nsymbiote)/;
+        headerPattern = /^symbiote$/;
+    } else {
+        splitPattern = /(?=\d\/➮)|(?=\n𝗰𝘆𝗰𝗹𝗼𝗽\n@nobrainflip\n·\n\d+h\n)|(?=\ncyclop)/;
+        headerPattern = /^𝗰𝘆𝗰𝗹𝗼𝗽$/u;
+    }
+
+    const tweets = threadText.split(splitPattern);
+    const splitTweets = [];
+
+    for (const tweet of tweets) {
+        let modifiedTweet = tweet.trim();
+
+        // Replace characters based on the selected influencer
+        if (influencer === "Midas") {
+            modifiedTweet = modifiedTweet.replace(/(\d+\/)/g, (match) => match + "➲ ");
+            modifiedTweet = modifiedTweet.replace(/➫/g, "➺");
+        } else if (influencer === "Chain Mind") {
+            modifiedTweet = modifiedTweet.replace(/➫/g, "➲");
+            modifiedTweet = modifiedTweet.replace(/❍/g, "➺");
+        } else if (influencer === "Blade") {
+            modifiedTweet = modifiedTweet.replace(/➮/g, "➲");
+            modifiedTweet = modifiedTweet.replace(/🕷 /g, "➺");
+        } else{
+            modifiedTweet = modifiedTweet.replace("➮", "➲");
+            modifiedTweet = modifiedTweet.replace(/✧/g, "➺");
+        }
+
+        // Check for the header pattern and remove the first 3 lines if found
+        modifiedTweet = trimExcludedLines(modifiedTweet, headerPattern, 4);
+
+        if (modifiedTweet.endsWith(" Views")) {
+            const lines = modifiedTweet.split('\n');
+            if (lines.length > 6) {
+                modifiedTweet = lines.slice(0, -4).join('\n');
+            } else {
+                modifiedTweet = ''; // Remove the entire tweet if there are fewer than 12 lines
+            }
+        }
+
+        splitTweets.push(modifiedTweet);
+    }
+
+    return splitTweets.filter(tweet => tweet.trim() !== ''); // Filter out empty tweets
+}
+
+
+
+function trimExcludedLines(tweet, headerPattern, linesToRemove) {
+    const lines = tweet.split('\n');
+
+    // Find the index of the first line that matches the header pattern
+    const startIndex = lines.findIndex(line => line.match(headerPattern));
+
+    if (startIndex >= 0) {
+        const trimmedLines = lines.slice(startIndex + linesToRemove);
+        return trimmedLines.join('\n');
+    } else {
+        // If the header pattern is not found, return the original tweet
+        return tweet;
+    }
+}
+
+// Function to trim excluded lines from the end based on a header pattern
+function trimExcludedLinesFromEnd(tweet, headerPattern, linesToRemove) {
+    const lines = tweet.split('\n');
+
+    if (lines.length > linesToRemove) {
+        const endIndex = lines.length - linesToRemove;
+        const trimmedLines = lines.slice(0, endIndex);
+        return trimmedLines.join('\n');
+    } else {
+        // If there are fewer lines than the specified linesToRemove, return an empty string
+        return '';
+    }
+}
+
+
+
+
+
+
+
+// Rest of the code remains the same
+function getThreadText() {
+    const tweets = processedTweets.join('\n\n');
+    return tweets;
+}
+
+function copyToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+}
+///cope thread
+
+// Render the tweets, including images
+renderProcessedTweets(processedTweets);
+
+
+function renderProcessedTweets(tweets) {
+    const threadPreview = document.getElementById('threadPreview');
+    threadPreview.innerHTML = '';
+
+    tweets.forEach((tweet, index) => {
+        const tweetElement = document.createElement('div');
+        tweetElement.classList.add('tweet');
+
+        // Create a textarea for the tweet text
+        const tweetTextElement = document.createElement('textarea');
+        tweetTextElement.value = tweet; // Each tweet is a string
+
+        tweetTextElement.style.backgroundColor = '#f2f2f2';
+        tweetTextElement.style.border = '1px solid #ccc';
+        tweetTextElement.style.resize = 'none';
+        tweetTextElement.style.marginBottom = '10px';
+
+        // Make the tweet text editable upon clicking
+        tweetTextElement.addEventListener('click', () => {
+            tweetTextElement.readOnly = false;
+            tweetTextElement.classList.add('editable');
+        });
+
+        // Add the edit listener here
+        tweetTextElement.addEventListener('input', (event) => {
+            tweets[index].text = event.target.value; // Update the edited tweet text
+            updateLocalStorageProcessed(tweets); // Update localStorage here
+        });
+
+        tweetElement.appendChild(tweetTextElement);
+
+        // Create a copy button
+        const copyButton = document.createElement('button');
+        copyButton.textContent = 'Copy';
+        copyButton.style.height = '173px'; // Set the button height to match the tweet area
+        copyButton.style.marginBottom = '9px'; // Adjust margin for spacing
+        copyButton.addEventListener('click', () => {
+            if (tweetTextElement.classList.contains('editable')) {
+                tweetTextElement.readOnly = true;
+                tweetTextElement.classList.remove('editable');
+            }
+            copyTweetToClipboard(tweetTextElement.value);
+        });
+
+        tweetElement.appendChild(copyButton);
+
+        // Create a drop zone for images
+        const dropZone = document.createElement('div');
+        dropZone.classList.add('drop-zone');
+        dropZone.textContent = 'Drop Image Here';
+
+        // Add event listeners for drag-and-drop
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const imageFile = event.dataTransfer.files[0];
+            handleImageUpload(imageFile, index, tweetElement);
+        });
+
+        tweetElement.appendChild(dropZone);
+
+        // Input for image upload
+        const imageInput = document.createElement('input');
+        imageInput.type = 'file';
+        imageInput.accept = 'image/*';
+        imageInput.style.display = 'none'; // Hide the input element
+        imageInput.addEventListener('change', (event) => {
+            const imageFile = event.target.files[0];
+            handleImageUpload(imageFile, index, tweetElement);
+        });
+
+        // Button to trigger image upload
+        const imageUploadButton = document.createElement('button');
+        imageUploadButton.textContent = 'Upload Image';
+        imageUploadButton.addEventListener('click', () => {
+            imageInput.click();
+        });
+
+        // Append the upload button under the drop zone
+        dropZone.appendChild(imageUploadButton);
+
+        // Display images if available from local storage
+        // Display images if available from local storage
+        const imageUrl = localStorage.getItem(`image${index}`);
+        if (imageUrl) {
+    // Create a div to contain the image and close button
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('image-container');
+
+    // Create two image elements: one for displaying on the page and another for copying
+    const smallImageElement = document.createElement('img');
+    const fullImageElement = document.createElement('img');
+
+    // Set the source of both image elements
+    smallImageElement.src = imageUrl;
+    fullImageElement.src = imageUrl;
+
+    // Add a class to the smaller image for styling
+    smallImageElement.classList.add('tweet-image');
+
+    // Create the close button
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Close';
+    closeButton.classList.add('cancel-button');
+
+    // Add an event listener to the close button
+    closeButton.addEventListener('click', () => {
+        // Remove the image container and update the tweet object
+        tweetElement.removeChild(imageContainer);
+        delete processedTweets[index].image; // Remove the image URL from the tweet object
+        tweetElement.classList.remove('has-image'); // Remove the 'has-image' class
+        updateLocalStorageProcessed(processedTweets);
+
+        // Delete the image URL from local storage
+        localStorage.removeItem(`image${index}`);
+
+        // Show the drop image section after closing the image
+        tweetElement.querySelector('.drop-zone').style.display = 'block';
+    });
+
+    // Append the small image and close button to the image container
+    imageContainer.appendChild(smallImageElement);
+    imageContainer.appendChild(closeButton);
+
+    // Add the image container to the tweet element
+    tweetElement.appendChild(imageContainer);
+
+    // Hide the drop image section when an image is displayed
+    dropZone.style.display = 'none';
+
+    // Set the full-sized image as a data attribute for copying
+    smallImageElement.dataset.fullSizeUrl = imageUrl;
+
+    // Add an event listener to copy the full-sized image when clicking on the small image
+    smallImageElement.addEventListener('click', () => {
+        const fullSizeUrl = smallImageElement.dataset.fullSizeUrl;
+        copyFullSizedImageToClipboard(fullSizeUrl);
+    });
+} else {
+    // If no image is found in local storage, show the drop image section
+    dropZone.style.display = 'block';
+}
+
+
+threadPreview.appendChild(tweetElement);
+});
+}
+
+
+
+function handleImageUpload(file, index, tweetElement) {
+    // Retrieve the tweets from local storage
+    const processedTweets = JSON.parse(localStorage.getItem('processedTweets')) || [];
+
+    // Check if index is within the valid range
+    if (index >= 0 && index < processedTweets.length) {
+        // Compress the image
+        compressImage(file, (compressedDataUrl) => {
+            // Store the compressed image URL in the tweet object
+            processedTweets[index].image = compressedDataUrl;
+            tweetElement.classList.add('has-image'); // Add the 'has-image' class
+
+            // Update the tweet text if it's edited
+            const tweetTextElement = tweetElement.querySelector('textarea');
+            if (tweetTextElement) {
+                processedTweets[index].text = tweetTextElement.value;
+            }
+
+            // Update local storage with the updated tweets
+            updateLocalStorageProcessed(processedTweets);
+
+            // Check if there's already an image element in the tweet
+            const existingImage = tweetElement.querySelector('.tweet-image');
+
+            if (existingImage) {
+                // If there's an existing image, replace it with the new one
+                existingImage.src = compressedDataUrl;
+            } else {
+                // Create a div to contain the image and close button
+                const imageContainer = document.createElement('div');
+                imageContainer.classList.add('image-container');
+
+                // Display the compressed image
+                const imageElement = document.createElement('img');
+                imageElement.src = compressedDataUrl;
+                imageElement.classList.add('tweet-image');
+
+                // Create the close button
+                const closeButton = document.createElement('button');
+                closeButton.textContent = 'Close';
+                closeButton.classList.add('cancel-button');
+
+                // Add an event listener to the close button
+                closeButton.addEventListener('click', () => {
+                    // Remove the image container and update the tweet object
+                    tweetElement.removeChild(imageContainer);
+                    delete processedTweets[index].image; // Remove the image URL from the tweet object
+                    tweetElement.classList.remove('has-image'); // Remove the 'has-image' class
+                    updateLocalStorageProcessed(processedTweets);
+
+                    // Delete the image URL from local storage
+                    localStorage.removeItem(`image${index}`);
+
+                    // Show the drop image section after closing the image
+                    tweetElement.querySelector('.drop-zone').style.display = 'block';
+                });
+
+                // Append the image and close button to the image container
+                imageContainer.appendChild(imageElement);
+                imageContainer.appendChild(closeButton);
+
+                // Add the image container to the tweet element
+                tweetElement.appendChild(imageContainer);
+
+                // Hide the drop image section when an image is uploaded
+                tweetElement.querySelector('.drop-zone').style.display = 'none';
+            }
+
+            // Save the uploaded image URL in local storage
+            localStorage.setItem(`image${index}`, compressedDataUrl);
+        });
+    } else {
+        console.error(`Invalid index: ${index}`);
+    }
+}
+
+
+
+
+
+// Rest of your code remains the same
+
+function compressImage(file, callback) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        const img = new Image();
+        img.src = event.target.result;
+
+        img.onload = function () {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Define the maximum width and height for the compressed image
+            const maxWidth = 380; // Adjust this as needed
+            const maxHeight = 380; // Adjust this as needed
+
+            // Calculate the new dimensions to maintain aspect ratio
+            let width = img.width;
+            let height = img.height;
+            if (width > height) {
+                if (width > maxWidth) {
+                    height *= maxWidth / width;
+                    width = maxWidth;
+                }
+            } else {
+                if (height > maxHeight) {
+                    width *= maxHeight / height;
+                    height = maxHeight;
+                }
+            }
+
+            // Set the canvas dimensions
+            canvas.width = width;
+            canvas.height = height;
+
+            // Draw the image on the canvas with the new dimensions
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Get the compressed data URL as PNG format (higher quality)
+            const compressedDataUrl = canvas.toDataURL('image/png');
+
+            // Pass the compressed data URL to the callback function
+            callback(compressedDataUrl);
+        };
+    };
+
+    reader.readAsDataURL(file);
+}
+
+
+function copyFullSizedImageToClipboard(imageUrl) {
+    // Create an invisible temporary textarea to hold the image URL
+    const tempTextarea = document.createElement('textarea');
+    tempTextarea.value = imageUrl;
+    tempTextarea.style.position = 'absolute';
+    tempTextarea.style.left = '-9999px';
+
+    // Append the textarea to the document body
+    document.body.appendChild(tempTextarea);
+
+    // Select and copy the image URL
+    tempTextarea.select();
+    document.execCommand('copy');
+
+    // Remove the temporary textarea
+    document.body.removeChild(tempTextarea);
+
+    // Notify the user that the image URL has been copied (you can customize this part)
+    alert('Full-sized image URL copied to clipboard!');
+}
+
+
+function updateLocalStorageProcessed(newProcessedTweets) {
+    localStorage.setItem('processedTweets', JSON.stringify(newProcessedTweets));
+}
+
+
+
+
+
+function copyTweetToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+}
+
+
+
+
+// Rest of your JavaScript code remains unchanged
+
+
+                console.log('localStorage:', localStorage); // Add this line
+
+
+
+
+
+
+    //          readButton.addEventListener('click', async () => {
+    //     const tweetUrl = readTweetUrl.value.trim();
+    //     if (tweetUrl !== '') {
+    //         try {
+    //             const tweetText = await fetchTweetFromServer(tweetUrl);
+    //             addReadTweet(tweetText);
+    //             readTweetUrl.value = '';
+    //         } catch (error) {
+    //             console.error('Error fetching tweet:', error);
+    //         }
+    //     }
+    // });
+
+    // async function fetchTweetFromServer(tweetUrl) {
+    //     try {
+    //         const response = await fetch(`/fetch-tweet?url=${encodeURIComponent(tweetUrl)}`);
+    //         const data = await response.json();
+    //         return data.text;
+    //     } catch (error) {
+    //         throw new Error('Error fetching tweet');
+    //     }
+    // }
+
+            // Check if night mode was previously selected
+            const isNightMode = localStorage.getItem('nightMode') === 'true';
+            if (isNightMode) {
+                body.classList.add('night-mode');
+                container.classList.add('night-mode');
+                threadPreview.classList.add('night-mode');
+                threadComposer.classList.add('night-mode');
+            }
+
+            nightModeButton.addEventListener('click', () => {
+                body.classList.toggle('night-mode');
+                container.classList.toggle('night-mode');
+                threadPreview.classList.toggle('night-mode');
+                threadComposer.classList.toggle('night-mode');
+
+                // Store the current mode in localStorage
+                const newMode = body.classList.contains('night-mode') ? 'true' : 'false';
+                localStorage.setItem('nightMode', newMode);
+            });
+        })
+
+const tweetText = document.getElementById('tweetText');
+const addTweetButton = document.getElementById('addTweet');
+const postThreadButton = document.getElementById('postThread');
+const threadPreview = document.getElementById('threadPreview');
+const readTweetButton = document.getElementById('readTweet');
+
+          // readTweetButton.addEventListener('click', async () => {
+    //const tweetUrl = readTweetUrl.value.trim(); // Corrected ID here
+//     if (tweetUrl !== '') {
+//         try {
+//             const tweetText = await fetchTweetTextFromUrl(tweetUrl);
+//             tweets.push(tweetText);
+//             renderThreadPreview();
+//             updateLocalStorage();
+//             readTweetUrl.value = ''; // Corrected ID here
+//         } catch (error) {
+//             console.error('Error fetching tweet:', error);
+//         }
+//     }
+// });
+
+let tweets = JSON.parse(localStorage.getItem('tweets')) || [];
+
+
+addTweetButton.addEventListener('click', () => {
+    const text = tweetText.value.trim();
+    if (text !== '') {
+        tweets.push(text);
+        renderThreadPreview();
+        tweetText.value = '';
+        updateLocalStorage();
+    }
+});
+
+postThreadButton.addEventListener('click', () => {
+            // Use your Twitter API ID (27637903) to post the thread using Twitter API
+            // Make API requests to post each tweet in the thread
+            // Handle success and error cases
+        });
+
+function renderThreadPreview() {
+    threadPreview.innerHTML = '';
+    for (let i = 0; i < tweets.length; i++) {
+        const tweetElement = document.createElement('div');
+        tweetElement.classList.add('tweet');
+
+        const tweetTextElement = document.createElement('textarea');
+        tweetTextElement.value = tweets[i];
+        tweetTextElement.addEventListener('input', (event) => {
+            tweets[i] = event.target.value;
+            updateLocalStorage();
+        });
+        tweetElement.appendChild(tweetTextElement);
+
+        const closeButton = document.createElement('span');
+        closeButton.textContent = '❌';
+        closeButton.classList.add('close-button');
+        closeButton.addEventListener('click', () => {
+            tweets.splice(i, 1);
+            renderThreadPreview();
+            updateLocalStorage();
+        });
+        tweetElement.appendChild(closeButton);
+
+        const imageButton = document.createElement('span');
+        imageButton.textContent = '📷';
+        imageButton.classList.add('image-button');
+        const imageInput = document.createElement('input');
+        imageInput.type = 'file';
+        imageInput.accept = 'image/*';
+        imageInput.style.display = 'none';
+        imageInput.addEventListener('change', (event) => {
+            handleImageUpload1(event, i);
+        });
+        imageButton.addEventListener('click', () => {
+            imageInput.click();
+        });
+        tweetElement.appendChild(imageButton);
+        tweetElement.appendChild(imageInput);
+
+        // Create a drop zone for images
+        const dropZone = document.createElement('div');
+        dropZone.classList.add('drop-zone');
+        dropZone.textContent = 'Drop Image Here';
+
+        // Add event listeners for drag-and-drop
+        tweetElement.addEventListener('dragover', (event) => {
+            event.preventDefault();
+        });
+
+        tweetElement.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const imageFile = event.dataTransfer.files[0];
+            handleImageUpload1(imageFile, i);
+        });
+
+        // Append the drop zone to the tweet element
+        tweetElement.appendChild(dropZone);
+
+        // Display images if available
+        if (tweets[i].image) {
+            const imageElement = document.createElement('img');
+            imageElement.src = tweets[i].image;
+            imageElement.classList.add('tweet-image');
+            tweetElement.appendChild(imageElement);
+        }
+
+        threadPreview.appendChild(tweetElement);
+    }
+}
+
+
+
+function handleImageUpload1(imageFile, tweetIndex) {
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+        const imageUrl = event.target.result;
+
+        // Add the image URL to the corresponding tweet in processedTweets
+        processedTweets[tweetIndex].image = imageUrl;
+
+        // Re-render the processed tweets to display the image
+        renderProcessedTweets(processedTweets);
+
+        // Update local storage with the new image URL
+        updateLocalStorageProcessed(processedTweets);
+    };
+
+    if (imageFile) {
+        reader.readAsDataURL(imageFile);
+    }
+}
+
+function addReadTweet(text) {
+    const tweetElement = document.createElement('div');
+    tweetElement.classList.add('tweet');
+
+    const tweetTextElement = document.createElement('textarea');
+    tweetTextElement.value = text;
+    tweetTextElement.readOnly = true;
+    tweetTextElement.style.backgroundColor = '#f2f2f2';
+    tweetTextElement.style.border = '1px solid #ccc';
+    tweetTextElement.style.resize = 'none';
+    tweetTextElement.style.marginBottom = '10px';
+    tweetElement.appendChild(tweetTextElement);
+
+    threadPreview.appendChild(tweetElement);
+}
+
+
+
+function updateLocalStorage() {
+    localStorage.setItem('tweets', JSON.stringify(tweets));
+}
+
+        // Initial rendering
+        renderThreadPreview();
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+</body>
+</html>

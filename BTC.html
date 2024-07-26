@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Price Tracker</title>
+<link rel="shortcut icon" type="image/x-icon" href="avatar.jpg" />
+
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer; /* Added cursor pointer to indicate clickable */
+  }
+  h1 {
+    color: #333;
+    text-align: center;
+  }
+  p {
+    color: #666;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+<div class="container" onclick="copyCryptoInfo()">
+  <h1>Crypto Prices</h1>
+  <p id="btc"></p>
+  <p id="sol"></p>
+  <p id="eth"></p>
+  <p id="sentiment" style="display: none;"></p> <button onclick="fetchCryptoPrices()">Refresh Prices</button>
+
+</div>
+
+<script>
+// This function fetches the latest crypto prices and updates the webpage
+function fetchCryptoPrices() {
+    const apiURL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,solana,ethereum&vs_currencies=usd&include_market_cap=false&include_24hr_change=true';
+
+    fetch(apiURL)
+    .then(response => response.json())
+    .then(data => {
+        // Update the prices on the webpage
+        document.getElementById('btc').textContent = formatCrypto('Bitcoin', data.bitcoin.usd, data.bitcoin.usd_24h_change);
+        document.getElementById('sol').textContent = formatCrypto('Solana', data.solana.usd, data.solana.usd_24h_change);
+        document.getElementById('eth').textContent = formatCrypto('Ethereum', data.ethereum.usd, data.ethereum.usd_24h_change);
+
+        // Calculate the overall market sentiment
+        let positiveChanges = 0;
+        let totalChanges = 0;
+        Object.values(data).forEach(crypto => {
+            if (crypto.usd_24h_change > 0) {
+                positiveChanges++;
+            }
+            totalChanges++;
+        });
+
+        // Determine the sentiment and update the sentiment paragraph
+        let sentimentText = '';
+        if (positiveChanges > totalChanges / 2) {
+            sentimentText = '> The overall market sentiment seems bullish this week based on the recent price changes.';
+        } else {
+            sentimentText = '> The overall market sentiment seems bearish this week based on the recent price changes.';
+        }
+        document.getElementById('sentiment').textContent = sentimentText;
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+// Function to format the price to two decimal places and add a dollar sign
+function formatPrice(price) {
+    return `$${price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+}
+
+// Function to determine the direction arrow based on the 24h change
+function getDirection(change) {
+    return change >= 0 ? '⇱' : '⇲';
+}
+
+// Function to format the change percentage to one decimal place
+function formatChange(change) {
+    if (change === undefined) {
+        return '(Data not available)';
+    }
+    return `(${change.toFixed(1)}%)`;
+}
+
+// Function to format the cryptocurrency information
+function formatCrypto(name, price, change) {
+    return `${getDirection(change)} ${name} ${formatPrice(price)} ${formatChange(change)}`;
+}
+
+// Function to copy the crypto prices and sentiment to the clipboard
+function copyCryptoInfo() {
+    // Get the defi, sentiment text and crypto prices text
+    const defiTitle = '**DEFI**';
+
+
+    const sentimentText = document.getElementById('sentiment').textContent;
+    const btcText = document.getElementById('btc').textContent;
+    const solText = document.getElementById('sol').textContent;
+    const ethText = document.getElementById('eth').textContent;
+    
+    // Construct the text to be copied
+    const textToCopy = `${defiTitle}\n\n${btcText}\n${solText}\n${ethText}\n\n${sentimentText}`;
+    
+    // Use the Clipboard API to copy the text
+    navigator.clipboard.writeText(textToCopy).then(function() {
+    }).catch(function(error) {
+        alert('Error copying text: ' + error);
+    });
+}
+
+// Call the fetchCryptoPrices function when the page loads
+window.onload = fetchCryptoPrices;
+</script>
+</body>
+</html>

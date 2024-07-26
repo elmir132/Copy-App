@@ -1,0 +1,41 @@
+  .radio {
+    padding: 4px;
+    border-radius: 3px;
+    background: none;
+    position: relative;
+    transition: background 0.3s ease-in-out;
+    box-shadow: inset 0 0 0 3px rgba(35, 33, 45, 0.3),
+        0 0 0 3px rgba(185, 185, 185, 0.3);
+        margin-bottom: 20px;
+}
+
+.radio input {
+    display: none;  Hide the radio button 
+}
+
+.night-mode .drop-zone{
+
+    border: 2px dashed #1D257D;
+    border-radius: 4px;
+    padding: 40px 0px 40px 0px;
+    cursor: pointer;
+
+}
+
+.night-mode .radio input:checked + label {
+background: #4E1D54;
+color: #fff;
+
+}
+
+.radio label {
+    display: block;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.radio input:checked + label {
+    background: linear-gradient(180deg, #95d891, #95d891);
+    color: #fff;
+}
